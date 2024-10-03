@@ -1,0 +1,21 @@
+{
+    "all": [
+      {
+        "id": 1,
+        "name": "Comprar mantimentos",
+        "description": "Comprar leite, pão, ovos e frutas",
+        "status": "pending",
+        "isCompleted": false,
+        "date": "2024-10-01"
+      },
+      {
+        "id": 2,
+        "name": "Fazer exercícios",
+        "description": "Treino de 30 minutos",
+        "status": "in-progress",
+        "isCompleted": false,
+        "date": "2024-10-02"
+      }
+    ]
+  }
+  
