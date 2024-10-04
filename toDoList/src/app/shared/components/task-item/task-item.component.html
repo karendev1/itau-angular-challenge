@@ -1,1 +1,17 @@
-<p>task-item works!</p>
+<div *ngIf="taskItem" class="taskItem__container">
+  <form [formGroup]="taskItemForm">
+    <label class="taskItem__custom-checkbox">
+      <input type="checkbox" formControlName="taskItem" />
+      <span class="taskItem__custom-checkbox--checkmark"></span>
+      <span class="taskItem__custom-checkbox--text">
+        <span class="taskItem__custom-checkbox--icon">💡</span>
+        {{ taskItem.name }}
+      </span>
+    </label>
+  </form>
+
+  <div class="taskItem__actions">
+    <p class="taskItem__edit"><i class="fa-solid fa-pencil"></i></p>
+    <p class="taskItem__delete"><i class="fa-solid fa-trash"></i></p>
+  </div>
+</div>

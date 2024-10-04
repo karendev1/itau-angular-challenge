@@ -1,21 +1,41 @@
 {
-    "all": [
-      {
-        "id": 1,
-        "name": "Comprar mantimentos",
-        "description": "Comprar leite, pão, ovos e frutas",
-        "status": "pending",
-        "isCompleted": false,
-        "date": "2024-10-01"
-      },
-      {
-        "id": 2,
-        "name": "Fazer exercícios",
-        "description": "Treino de 30 minutos",
-        "status": "in-progress",
-        "isCompleted": false,
-        "date": "2024-10-02"
-      }
-    ]
-  }
-  
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Comprar mantimentos",
+      "description": "Comprar leite, pão, ovos e frutas",
+      "status": "pending",
+      "isCompleted": false,
+      "date": "2024-10-01"
+    },
+    {
+      "id": 2,
+      "name": "Fazer exercícios",
+      "description": "Treino de 30 minutos",
+      "status": "in-progress",
+      "isCompleted": false,
+      "date": "2024-10-02"
+    },
+    {
+      "id": 3,
+      "name": "Lavar a roupa",
+      "description": "",
+      "isCompleted": false,
+      "date": "2024-10-04T01:07:49.263Z"
+    },
+    {
+      "id": 4,
+      "name": "Lavar a roupa",
+      "description": "",
+      "isCompleted": false,
+      "date": "2024-10-04T01:07:51.240Z"
+    },
+    {
+      "id": 5,
+      "name": "teste",
+      "description": "",
+      "isCompleted": false,
+      "date": "2024-10-04T01:11:26.385Z"
+    }
+  ]
+}
