@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TaskService } from './task.service';
-import { ITask } from '../../shared/interfaces/task';
+import { ITask } from '../../shared/interfaces/task.interface';
 
 describe('TaskService', () => {
   let service: TaskService;

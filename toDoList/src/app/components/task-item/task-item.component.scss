@@ -4,10 +4,15 @@
   width: 100%;
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
+  padding: 10px;
 
-  &:hover{
+  &:hover {
     background: var(--bg-grey);
   }
+}
+
+.taskItem__container--selected {
+  background: var(--bg-grey);
 }
 
 .taskItem__custom-checkbox {
@@ -76,11 +81,11 @@
 }
 
 .taskItem__actions .fa-solid {
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 
-  &:hover{
-    font-size: 16px;
+  &:hover {
+    font-size: 18px;
   }
 }
 
@@ -90,5 +95,30 @@
 
 .taskItem__actions .fa-trash {
   color: var(--negative);
-  margin-left: 12px;
+  margin-left: 14px;
+}
+
+.taskItem__actions .fa-check {
+  color: var(--green);
+  margin-left: 14px;
+  font-size: 18px;
+  margin-right: 15px;
+
+  &:hover {
+    font-size: 20px;
+  }
+}
+
+.taskItem__form {
+  display: flex;
+  align-items: center;
+}
+
+.taskItem__form--edit {
+  border: none;
+  background: var(--bg-grey);
+
+  &:focus {
+    outline: none;
+  }
 }

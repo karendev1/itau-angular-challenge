@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskFormComponent } from './shared/components/task-form/task-form.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 import { CommonModule } from '@angular/common';
-import { TaskListComponent } from './shared/components/task-list/task-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ITask } from './shared/interfaces/task';
+import { ITask } from './shared/interfaces/task.interface';
 import { TaskService } from './core/services/task.service';
+import { v4 as uuidv4 } from 'uuid';
+import { Observable, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,8 @@ import { TaskService } from './core/services/task.service';
 export class AppComponent {
   title = 'toDoList';
   protected tasksList: ITask[] = [];
+  protected loading = false;
+  protected error = false;
 
   constructor(private readonly taskService: TaskService) {}
 
@@ -31,34 +35,54 @@ export class AppComponent {
     this.getItemsList();
   }
 
-  //TODO: TRATAR ERROS E CRIAR LOADING
   public getItemsList(): void {
-    this.taskService.getTasks().subscribe({
-      next: (response) => {
-        this.tasksList = response;
-        console.log(this.tasksList);
-      },
-      error: (error) => {
-        console.error('Erro ao carregar as tarefas:', error);
-      },
-      complete: () => {
-        console.log('Requisição de tarefas finalizada');
-      },
+    this.handleRequest(this.taskService.getTasks(), (response) => {
+      this.tasksList = response;
+      console.log(this.tasksList);
     });
   }
 
-  //TODO: TRATAR ERROS E CRIAR LOADING
   public addTask(task: string): void {
     const body: ITask = {
-      id: this.tasksList.length + 1,
+      id: uuidv4(),
       name: task,
-      description: '',
       isCompleted: false,
       date: new Date(),
     };
-    this.taskService.createTask(body).subscribe({
-      next: () => {
-        this.getItemsList();
+    this.handleRequest(this.taskService.createTask(body), () => {
+      this.getItemsList();
+    });
+  }
+
+  public deleteTask(id: string): void {
+    this.handleRequest(this.taskService.deleteTask(id), () => {
+      this.getItemsList();
+    });
+  }
+
+  public editTask(task: ITask): void {
+    this.handleRequest(this.taskService.updateTask(task.id, task), () => {
+      this.getItemsList();
+    });
+  }
+
+  private handleRequest<T>(
+    request: Observable<T>,
+    onSuccess: (response: T) => void
+  ): void {
+    this.loading = true;
+    this.error = false;
+
+    request.subscribe({
+      next: (response) => {
+        onSuccess(response);
+      },
+      error: (error) => {
+        this.error = true;
+        throwError(() => error);
+      },
+      complete: () => {
+        this.loading = false;
       },
     });
   }

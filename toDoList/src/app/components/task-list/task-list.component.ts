@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskItemComponent } from '../task-item/task-item.component';
-import { TaskService } from '../../../core/services/task.service';
-import { ITask } from '../../interfaces/task';
 import { CommonModule } from '@angular/common';
+import { ITask } from '../../shared/interfaces/task.interface';
 
 @Component({
   selector: 'app-task-list',
@@ -13,4 +12,6 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskListComponent {
   @Input() tasksList!: ITask[];
+  @Output() $deleteTask = new EventEmitter<string>();
+  @Output() $editTask = new EventEmitter<ITask>();
 }

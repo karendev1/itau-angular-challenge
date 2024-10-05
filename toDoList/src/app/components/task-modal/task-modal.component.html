@@ -1,0 +1,22 @@
+<div class="task-modal__container" *ngIf="openModal">
+  <h3 class="task-modal__title" *ngIf="title">
+    {{ title }}
+  </h3>
+  <p class="task-modal__subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  <div class="task-modal__actions" *ngIf="actions">
+    <button
+      (click)="actions.primary.callback()"
+      class="task-modal__button task-modal__button--primary"
+    >
+      {{ actions.primary.label }}
+    </button>
+    <button
+      (click)="actions.secondary.callback()"
+      class="task-modal__button task-modal__button--secondary"
+    >
+      {{ actions.secondary.label }}
+    </button>
+  </div>
+</div>
+
+<div class="task-modal__overlay" *ngIf="openModal"></div>

@@ -29,5 +29,6 @@ export class TaskFormComponent {
 
   public addTask(): void {
     this.$taskAdded.emit(this.taskForm.value.task);
+    this.taskForm.reset();
   }
 }

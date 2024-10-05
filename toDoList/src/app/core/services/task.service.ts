@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ITask } from '../../shared/interfaces/task';
+import { ITask } from '../../shared/interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class TaskService {
       .pipe(catchError(this.handleError));
   }
 
-  updateTask(id: number, ITask: ITask): Observable<ITask> {
+  updateTask(id: string, ITask: ITask): Observable<ITask> {
     const url = `${this.apiUrl}/${id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http
@@ -46,7 +46,7 @@ export class TaskService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteTask(id: number): Observable<void> {
+  deleteTask(id: string): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url).pipe(catchError(this.handleError));
   }

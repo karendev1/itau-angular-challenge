@@ -1,0 +1,46 @@
+.task-modal__container {
+  width: 300px;
+  z-index: 9999;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.task-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.task-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.task-modal__button {
+  color: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 12px;
+  width: 45%;
+  border-radius: 5px;
+}
+
+.task-modal__button.task-modal__button--primary {
+  background: var(--positive);
+}
+
+.task-modal__button.task-modal__button--secondary {
+  background: var(--negative);
+}

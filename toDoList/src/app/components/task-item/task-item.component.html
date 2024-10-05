@@ -1,0 +1,55 @@
+<div
+  *ngIf="taskItem"
+  class="taskItem__container"
+  [ngClass]="{
+    'taskItem__container--selected':
+      taskItemForm.value.selectedTaskItem || hasEditItem
+  }"
+>
+  <form [formGroup]="taskItemForm" class="taskItem__form">
+    <label class="taskItem__custom-checkbox">
+      <input type="checkbox" formControlName="selectedTaskItem" />
+      <span class="taskItem__custom-checkbox--checkmark"></span>
+      <span class="taskItem__custom-checkbox--text">
+        <span class="taskItem__custom-checkbox--icon">💡</span>
+        <p *ngIf="!hasEditItem">{{ taskItem.name }}</p>
+      </span>
+    </label>
+
+    <input
+      type="text"
+      formControlName="taskItem"
+      *ngIf="hasEditItem"
+      class="taskItem__form--edit"
+      [id]="taskItem.id"
+    />
+  </form>
+
+  <div class="taskItem__actions">
+    <p class="taskItem__edit" (click)="handleEditItem()" *ngIf="!hasEditItem">
+      <i class="fa-solid fa-pencil"></i>
+    </p>
+    <p
+      class="taskItem__delete"
+      (click)="handleDeleteModal()"
+      *ngIf="!hasEditItem"
+    >
+      <i class="fa-solid fa-trash"></i>
+    </p>
+
+    <p>
+      <i
+        class="fa-solid fa-check"
+        *ngIf="hasEditItem"
+        (click)="confirmEditItem(taskItem)"
+      ></i>
+    </p>
+  </div>
+</div>
+
+<app-task-modal
+  [openModal]="showModal"
+  [title]="titleModal"
+  [subtitle]="subtitleModal"
+  [actions]="actionsModal"
+></app-task-modal>
