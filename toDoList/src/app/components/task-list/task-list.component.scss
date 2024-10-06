@@ -6,3 +6,14 @@
   overflow-x: hidden;
   padding-right: 30px;
 }
+
+.task-list__empty {
+  margin-top: 40px;
+}
+
+.task-list__empty--text {
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--secondary-text);
+}

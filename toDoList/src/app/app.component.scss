@@ -46,3 +46,11 @@
   border-bottom: 2px solid var(--border);
   padding-bottom: 20px;
 }
+
+@media (max-width: 1200px) {
+    .app__container {
+      grid-template-columns: 1fr;
+      margin: 0;
+      width: 95%;
+    }
+  }

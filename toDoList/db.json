@@ -2,9 +2,9 @@
   "tasks": [
     {
       "id": "51840275-73ba-4562-8c01-7f161d65d57e",
-      "date": "2024-10-06T17:14:51.600Z",
+      "date": "2024-10-06T17:28:22.502Z",
       "name": "limpar a casa teste",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "a9abca31-241d-4644-9e39-e4a13d116be0",
@@ -14,9 +14,9 @@
     },
     {
       "id": "17f45a95-78c9-486e-b2f4-e6633f7bb0dc",
-      "date": "2024-10-06T17:15:19.429Z",
+      "date": "2024-10-06T17:28:25.233Z",
       "name": "te",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "b20f2016-c85c-426f-ab54-1b3378ed6164",
@@ -29,6 +29,12 @@
       "date": "2024-10-06T16:48:13.402Z",
       "name": "teste",
       "isCompleted": true
+    },
+    {
+      "id": "6a0b01d9-3a92-4cb4-b02b-ea2c770df9c7",
+      "name": "Teste",
+      "isCompleted": false,
+      "date": "2024-10-06T17:39:24.686Z"
     }
   ]
 }

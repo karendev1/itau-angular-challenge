@@ -1,4 +1,4 @@
-<div class="task-list__container">
+<div class="task-list__container" *ngIf="tasksList.length >= 1">
   <div *ngFor="let item of tasksList; let i = index">
     <app-task-item
       [setTaskItem]="item"
@@ -6,4 +6,13 @@
       ($editTask)="$editTask.emit($event)"
     ></app-task-item>
   </div>
+</div>
+
+<div class="task-list__empty" *ngIf="tasksList.length < 1">
+  <p class="task-list__empty--text">Nenhuma tarefa adicionada.</p>
+
+  <p class="task-list__empty--text">
+    Crie uma tarefa para aparecer aqui.
+    <i class="fa-regular fa-face-laugh"></i>
+  </p>
 </div>
