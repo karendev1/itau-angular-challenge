@@ -71,6 +71,11 @@
   align-items: center;
 }
 
+.taskItem__custom-checkbox--text-completed {
+  color: var(--secondary-text);
+  text-decoration: line-through;
+}
+
 .taskItem__custom-checkbox--icon {
   margin-right: 5px;
   font-size: 18px;
@@ -121,4 +126,18 @@
   &:focus {
     outline: none;
   }
+}
+
+.taskItem__custom-checkbox--information{
+  display: flex;
+  flex-direction: column;
+}
+
+.taskItem__custom-checkbox--information p{
+  margin: 0px;
+}
+
+.taskItem__custom-checkbox--information span{
+  font-size: 12px;
+  text-decoration: none;
 }

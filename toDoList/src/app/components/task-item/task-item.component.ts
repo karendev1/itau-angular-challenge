@@ -16,6 +16,7 @@ import { ITask } from '../../shared/interfaces/task.interface';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { IActions } from '../../shared/interfaces/actions.interface';
 import { EModalDataDelete } from '../../shared/enums/modal.enum';
+import { formatDateHelper } from '../../shared/helpers/format-date.helper';
 
 @Component({
   selector: 'app-task-item',
@@ -25,9 +26,15 @@ import { EModalDataDelete } from '../../shared/enums/modal.enum';
   styleUrl: './task-item.component.scss',
 })
 export class TaskItemComponent {
-  @Input() taskItem!: ITask;
+  @Input() showActionsItem: boolean = true;
   @Output() $deleteTask = new EventEmitter<void>();
   @Output() $editTask = new EventEmitter<ITask>();
+
+  @Input() set setTaskItem(value: ITask) {
+    this.taskItem = value;
+    this.taskItemForm.get('selectedTaskItem')?.setValue(value.isCompleted);
+    this.completedDate = formatDateHelper(value.date);
+  }
 
   protected taskItemForm!: FormGroup;
   protected titleModal!: string;
@@ -35,6 +42,8 @@ export class TaskItemComponent {
   protected actionsModal!: IActions;
   protected showModal = false;
   protected hasEditItem = false;
+  protected taskItem!: ITask;
+  protected completedDate!: string;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -45,9 +54,13 @@ export class TaskItemComponent {
 
   public createForm(): void {
     this.taskItemForm = this.fb.group({
-      selectedTaskItem: ['', [Validators.required, Validators.minLength(3)]],
+      selectedTaskItem: [false, [Validators.required, Validators.minLength(3)]],
       taskItem: [null],
     });
+  }
+
+  ngOnInit() {
+    this.taskItemForm.get('taskItem')?.setValue(this.taskItem.name);
   }
 
   public handleDeleteModal(): void {
@@ -76,11 +89,10 @@ export class TaskItemComponent {
     const input = document.getElementById(this.taskItem.id) as HTMLInputElement;
     if (input && this.hasEditItem) {
       input.focus();
-      this.taskItemForm.get('taskItem')?.setValue(this.taskItem.name)
     }
   }
 
-  public confirmEditItem(taskItem: ITask): void {
+  public confirmEditItem(taskItem: ITask, isCompleted = false): void {
     if (!this.taskItemForm.value.taskItem) {
       return;
     }
@@ -88,8 +100,14 @@ export class TaskItemComponent {
       id: taskItem.id,
       date: new Date(),
       name: this.taskItemForm.value.taskItem,
-      isCompleted: false,
+      isCompleted: isCompleted,
     };
     this.$editTask.emit(newTask);
+    console.log(newTask);
+  }
+
+  public setCompletedTask(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.confirmEditItem(this.taskItem, inputElement.checked);
   }
 }

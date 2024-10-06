@@ -1,0 +1,10 @@
+<div class="task-list-completed__container" *ngIf="tasksListCompleted.length">
+    <h3 class="task-list-completed--title">Tarefas Concluídas</h3>
+  <div *ngFor="let item of tasksListCompleted; let i = index">
+    <app-task-item
+      [setTaskItem]="item"
+      [showActionsItem]="false"
+      ($editTask)="$editTask.emit($event)"
+    ></app-task-item>
+  </div>
+</div>

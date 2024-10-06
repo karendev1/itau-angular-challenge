@@ -1,12 +1,23 @@
-<ng-container *ngIf="!loading && !error">
-  <app-task-form ($taskAdded)="addTask($event)"></app-task-form>
+<header>
+  <h1 class="app__title">ToDo List - Angular Challenge Itaú</h1>
+</header>
 
-  <app-task-list
-    [tasksList]="tasksList"
-    ($deleteTask)="deleteTask($event)"
+<div *ngIf="!loading && !error" class="app__container">
+  <div class="app__container--action-tasks">
+    <app-task-form ($taskAdded)="addTask($event)"></app-task-form>
+
+    <app-task-list
+      [tasksList]="tasksList"
+      ($deleteTask)="deleteTask($event)"
+      ($editTask)="editTask($event)"
+    ></app-task-list>
+  </div>
+
+  <app-completed-tasks
+    [tasksListCompleted]="tasksListCompleted"
     ($editTask)="editTask($event)"
-  ></app-task-list>
-</ng-container>
+  ></app-completed-tasks>
+</div>
 
 <div class="app-loading-overlay" *ngIf="loading && !error">
   <div class="app-loading-overlay__spinner"></div>

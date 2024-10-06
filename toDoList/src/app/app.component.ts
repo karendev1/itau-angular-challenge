@@ -8,6 +8,7 @@ import { ITask } from './shared/interfaces/task.interface';
 import { TaskService } from './core/services/task.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable, throwError } from 'rxjs';
+import { CompletedTasksComponent } from './components/completed-tasks/completed-tasks.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { Observable, throwError } from 'rxjs';
     TaskFormComponent,
     TaskListComponent,
     HttpClientModule,
+    CompletedTasksComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -26,6 +28,8 @@ import { Observable, throwError } from 'rxjs';
 export class AppComponent {
   title = 'toDoList';
   protected tasksList: ITask[] = [];
+  protected tasksListCompleted: ITask[] = [];
+
   protected loading = false;
   protected error = false;
 
@@ -37,8 +41,8 @@ export class AppComponent {
 
   public getItemsList(): void {
     this.handleRequest(this.taskService.getTasks(), (response) => {
-      this.tasksList = response;
-      console.log(this.tasksList);
+      this.tasksList = response.filter((item) => !item.isCompleted);
+      this.tasksListCompleted = response.filter((item) => item.isCompleted);
     });
   }
 

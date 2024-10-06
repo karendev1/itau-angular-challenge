@@ -3,19 +3,29 @@
   class="taskItem__container"
   [ngClass]="{
     'taskItem__container--selected':
-      taskItemForm.value.selectedTaskItem || hasEditItem
+      (taskItemForm.value.selectedTaskItem && showActionsItem) || hasEditItem
   }"
 >
   <form [formGroup]="taskItemForm" class="taskItem__form">
     <label class="taskItem__custom-checkbox">
-      <input type="checkbox" formControlName="selectedTaskItem" />
+      <input
+        type="checkbox"
+        formControlName="selectedTaskItem"
+        (change)="setCompletedTask($event)"
+      />
       <span class="taskItem__custom-checkbox--checkmark"></span>
-      <span class="taskItem__custom-checkbox--text">
-        <span class="taskItem__custom-checkbox--icon">💡</span>
-        <p *ngIf="!hasEditItem">{{ taskItem.name }}</p>
+      <span
+        class="taskItem__custom-checkbox--text"
+        [ngClass]="{
+          'taskItem__custom-checkbox--text-completed': taskItem.isCompleted
+        }"
+      >
+        <div class="taskItem__custom-checkbox--information">
+          <p *ngIf="!hasEditItem">{{ taskItem.name }}</p>
+          <span *ngIf="taskItem.isCompleted">{{ completedDate }}</span>
+        </div>
       </span>
     </label>
-
     <input
       type="text"
       formControlName="taskItem"
@@ -25,7 +35,7 @@
     />
   </form>
 
-  <div class="taskItem__actions">
+  <div class="taskItem__actions" *ngIf="showActionsItem">
     <p class="taskItem__edit" (click)="handleEditItem()" *ngIf="!hasEditItem">
       <i class="fa-solid fa-pencil"></i>
     </p>
