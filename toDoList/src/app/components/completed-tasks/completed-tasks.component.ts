@@ -13,4 +13,5 @@ import { TaskItemComponent } from '../task-item/task-item.component';
 export class CompletedTasksComponent {
   @Input() tasksListCompleted!: ITask[];
   @Output() $editTask = new EventEmitter<ITask>();
+  @Output() $deleteTask = new EventEmitter<string>();
 }

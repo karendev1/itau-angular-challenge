@@ -35,8 +35,8 @@
     />
   </form>
 
-  <div class="taskItem__actions" *ngIf="showActionsItem">
-    <p class="taskItem__edit" (click)="handleEditItem()" *ngIf="!hasEditItem">
+  <div class="taskItem__actions">
+    <p class="taskItem__edit" (click)="handleEditItem()" *ngIf="!hasEditItem && showActionsItem">
       <i class="fa-solid fa-pencil"></i>
     </p>
     <p
@@ -50,7 +50,7 @@
     <p>
       <i
         class="fa-solid fa-check"
-        *ngIf="hasEditItem"
+        *ngIf="hasEditItem && showActionsItem"
         (click)="confirmEditItem(taskItem)"
       ></i>
     </p>

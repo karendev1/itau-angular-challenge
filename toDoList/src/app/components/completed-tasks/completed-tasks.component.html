@@ -5,6 +5,7 @@
       [setTaskItem]="item"
       [showActionsItem]="false"
       ($editTask)="$editTask.emit($event)"
+      ($deleteTask)="$deleteTask.emit(item.id)"
     ></app-task-item>
   </div>
 </div>
