@@ -23,20 +23,16 @@ describe('TaskService', () => {
   it('should retrieve all tasks (getTasks)', () => {
     const dummyTasks: ITask[] = [
       {
-        id: 1,
+        id: '1',
         name: 'Task 1',
-        description: 'Description 1',
-        status: 'pending',
         isCompleted: false,
-        date: '2024-10-01',
+        date: new Date(),
       },
       {
-        id: 2,
+        id: '2',
         name: 'Task 2',
-        description: 'Description 2',
-        status: 'done',
         isCompleted: true,
-        date: '2024-10-02',
+        date: new Date(),
       },
     ];
 
@@ -52,12 +48,10 @@ describe('TaskService', () => {
 
   it('should retrieve a task by ID (getTaskById)', () => {
     const dummyTask: ITask = {
-      id: 1,
+      id: '1',
       name: 'Task 1',
-      description: 'Description 1',
-      status: 'pending',
       isCompleted: false,
-      date: '2024-10-01',
+      date: new Date(),
     };
 
     service.getTaskById(1).subscribe((task) => {
@@ -71,12 +65,10 @@ describe('TaskService', () => {
 
   it('should create a new task (createTask)', () => {
     const newTask: ITask = {
-      id: 3,
+      id: '3',
       name: 'New Task',
-      description: 'New Description',
-      status: 'pending',
       isCompleted: false,
-      date: '2024-10-03',
+      date: new Date(),
     };
 
     service.createTask(newTask).subscribe((task) => {
@@ -91,15 +83,13 @@ describe('TaskService', () => {
 
   it('should update an existing task (updateTask)', () => {
     const updatedTask: ITask = {
-      id: 1,
+      id: '1',
       name: 'Updated Task',
-      description: 'Updated Description',
-      status: 'in-progress',
       isCompleted: false,
-      date: '2024-10-01',
+      date: new Date(),
     };
 
-    service.updateTask(1, updatedTask).subscribe((task) => {
+    service.updateTask('1', updatedTask).subscribe((task) => {
       expect(task).toEqual(updatedTask);
     });
 
@@ -109,29 +99,8 @@ describe('TaskService', () => {
     req.flush(updatedTask);
   });
 
-  it('should mark a task as completed (markTaskAsCompleted)', () => {
-    const completedTask: ITask = {
-      id: 1,
-      name: 'Task 1',
-      description: 'Description 1',
-      status: 'done',
-      isCompleted: true,
-      date: '2024-10-01',
-    };
-
-    service.markTaskAsCompleted(1).subscribe((task) => {
-      expect(task.isCompleted).toBe(true);
-      expect(task.status).toBe('done');
-    });
-
-    const req = httpMock.expectOne(`${apiUrl}/1`);
-    expect(req.request.method).toBe('PATCH');
-    expect(req.request.body).toEqual({ isCompleted: true, status: 'done' });
-    req.flush(completedTask);
-  });
-
   it('should delete a task (deleteTask)', () => {
-    service.deleteTask(1).subscribe((res) => {
+    service.deleteTask('1').subscribe((res) => {
       expect(res).toBeNull();
     });
 

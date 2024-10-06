@@ -7,10 +7,15 @@
       [showActionsItem]="false"
       ($editTask)="$editTask.emit($event)"
       ($deleteTask)="$deleteTask.emit(item.id)"
+      data-testId="task-item"
     ></app-task-item>
   </ng-container>
 
-  <p class="task-list__empty--text" *ngIf="!tasksListCompleted.length">
+  <p
+    class="task-list__empty--text"
+    *ngIf="!tasksListCompleted.length"
+    data-testId="empty-text"
+  >
     Nenhuma tarefa concluída.
     <i class="fa-regular fa-face-sad-tear"></i>
   </p>

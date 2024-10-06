@@ -37,15 +37,6 @@ export class TaskService {
       .pipe(catchError(this.handleError));
   }
 
-  markTaskAsCompleted(id: number): Observable<ITask> {
-    const url = `${this.apiUrl}/${id}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = { isCompleted: true, status: 'done' };
-    return this.http
-      .patch<ITask>(url, body, { headers })
-      .pipe(catchError(this.handleError));
-  }
-
   deleteTask(id: string): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url).pipe(catchError(this.handleError));

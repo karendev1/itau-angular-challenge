@@ -1,29 +1,46 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TaskService } from './core/services/task.service';
+import { Observable, of } from 'rxjs';
+import { ITask } from './shared/interfaces/task.interface';
+import { getTasksMock } from './shared/mock-unit-test/response.mock';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let service: TaskService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        {
+          provide: TaskService,
+          useValue: {
+            getTasks: (): Observable<ITask[]> => of(getTasksMock),
+          },
+        },
+      ],
     }).compileComponents();
   });
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    service = TestBed.inject(TaskService);
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should have the 'toDoList' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('toDoList');
+    expect(component.title).toEqual('toDoList');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should call getItemsList when init component', () => {
+    const spyGetItemsList = spyOn(component, 'getItemsList');
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, toDoList');
+    expect(spyGetItemsList).toHaveBeenCalled();
   });
 });
