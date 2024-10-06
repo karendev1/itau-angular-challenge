@@ -103,7 +103,6 @@ export class TaskItemComponent {
       isCompleted: isCompleted,
     };
     this.$editTask.emit(newTask);
-    console.log(newTask);
   }
 
   public setCompletedTask(event: Event): void {

@@ -32,11 +32,16 @@
       *ngIf="hasEditItem"
       class="taskItem__form--edit"
       [id]="taskItem.id"
+      (keyup.enter)="confirmEditItem(taskItem)"
     />
   </form>
 
   <div class="taskItem__actions">
-    <p class="taskItem__edit" (click)="handleEditItem()" *ngIf="!hasEditItem && showActionsItem">
+    <p
+      class="taskItem__edit"
+      (click)="handleEditItem()"
+      *ngIf="!hasEditItem && showActionsItem"
+    >
       <i class="fa-solid fa-pencil"></i>
     </p>
     <p
