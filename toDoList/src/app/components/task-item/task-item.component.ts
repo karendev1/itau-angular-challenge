@@ -4,6 +4,8 @@ import {
   EventEmitter,
   Input,
   Output,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -31,19 +33,19 @@ export class TaskItemComponent {
   @Output() $editTask = new EventEmitter<ITask>();
 
   @Input() set setTaskItem(value: ITask) {
-    this.taskItem = value;
-    this.taskItemForm.get('selectedTaskItem')?.setValue(value.isCompleted);
-    this.completedDate = formatDateHelper(value.date);
+    this.taskItem.set(value);
+    this.taskItemForm().get('selectedTaskItem')?.setValue(value.isCompleted);
+    this.completedDate.set(formatDateHelper(value.date));
   }
 
-  protected taskItemForm!: FormGroup;
-  protected titleModal!: string;
-  protected subtitleModal!: string;
-  protected actionsModal!: IActions;
-  protected showModal = false;
-  protected hasEditItem = false;
-  protected taskItem!: ITask;
-  protected completedDate!: string;
+  protected taskItemForm: WritableSignal<FormGroup> = signal(new FormGroup({}));
+  protected titleModal: WritableSignal<string> = signal('');
+  protected subtitleModal: WritableSignal<string> = signal('');
+  protected actionsModal: WritableSignal<IActions> = signal({} as IActions);
+  protected showModal: WritableSignal<boolean> = signal(false);
+  protected hasEditItem: WritableSignal<boolean> = signal(false);
+  protected taskItem: WritableSignal<ITask> = signal({} as ITask);
+  protected completedDate: WritableSignal<string> = signal('')
 
   constructor(
     private readonly fb: FormBuilder,
@@ -53,20 +55,20 @@ export class TaskItemComponent {
   }
 
   public createForm(): void {
-    this.taskItemForm = this.fb.group({
+    this.taskItemForm.set(this.fb.group({
       selectedTaskItem: [false, [Validators.required, Validators.minLength(3)]],
       taskItem: [null],
-    });
+    }));
   }
 
   ngOnInit() {
-    this.taskItemForm.get('taskItem')?.setValue(this.taskItem.name);
+    this.taskItemForm().get('taskItem')?.setValue(this.taskItem().name);
   }
 
   public handleDeleteModal(): void {
-    this.titleModal = EModalDataDelete.TITLE_DELETE;
-    this.subtitleModal = EModalDataDelete.SUBTITLE_DELETE;
-    this.actionsModal = {
+    this.titleModal.set(EModalDataDelete.TITLE_DELETE);
+    this.subtitleModal.set(EModalDataDelete.SUBTITLE_DELETE);
+    this.actionsModal.set({
       primary: {
         label: EModalDataDelete.LABEL_PRIMARY,
         callback: () => this.$deleteTask.emit(),
@@ -75,31 +77,31 @@ export class TaskItemComponent {
         label: EModalDataDelete.LABEL_SECONDARY,
         callback: () => this.handleShowModal(),
       },
-    };
-    this.showModal = true;
+    });
+    this.showModal.set(true);
   }
 
   public handleShowModal(): void {
-    this.showModal = !this.showModal;
+    this.showModal.set(!this.showModal);
   }
 
   public handleEditItem(): void {
-    this.hasEditItem = !this.hasEditItem;
+    this.hasEditItem.set(!this.hasEditItem());
     this.cdr.detectChanges();
-    const input = document.getElementById(this.taskItem.id) as HTMLInputElement;
-    if (input && this.hasEditItem) {
+    const input = document.getElementById(this.taskItem().id) as HTMLInputElement;
+    if (input && this.hasEditItem()) {
       input.focus();
     }
   }
 
   public confirmEditItem(taskItem: ITask, isCompleted = false): void {
-    if (!this.taskItemForm.value.taskItem) {
+    if (!this.taskItemForm().value.taskItem) {
       return;
     }
     const newTask: ITask = {
       id: taskItem.id,
       date: new Date(),
-      name: this.taskItemForm.value.taskItem,
+      name: this.taskItemForm().value.taskItem,
       isCompleted: isCompleted,
     };
     this.$editTask.emit(newTask);
@@ -107,6 +109,6 @@ export class TaskItemComponent {
 
   public setCompletedTask(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    this.confirmEditItem(this.taskItem, inputElement.checked);
+    this.confirmEditItem(this.taskItem(), inputElement.checked);
   }
 }

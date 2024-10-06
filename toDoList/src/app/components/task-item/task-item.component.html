@@ -1,12 +1,12 @@
 <div
-  *ngIf="taskItem"
+  *ngIf="taskItem()"
   class="taskItem__container"
   [ngClass]="{
     'taskItem__container--selected':
-      (taskItemForm.value.selectedTaskItem && showActionsItem) || hasEditItem
+      (taskItemForm().value.selectedTaskItem && showActionsItem) || hasEditItem()
   }"
 >
-  <form [formGroup]="taskItemForm" class="taskItem__form">
+  <form [formGroup]="taskItemForm()" class="taskItem__form">
     <label class="taskItem__custom-checkbox">
       <input
         type="checkbox"
@@ -17,22 +17,22 @@
       <span
         class="taskItem__custom-checkbox--text"
         [ngClass]="{
-          'taskItem__custom-checkbox--text-completed': taskItem.isCompleted
+          'taskItem__custom-checkbox--text-completed': taskItem().isCompleted
         }"
       >
         <div class="taskItem__custom-checkbox--information">
-          <p *ngIf="!hasEditItem">{{ taskItem.name }}</p>
-          <span *ngIf="taskItem.isCompleted">{{ completedDate }}</span>
+          <p *ngIf="!hasEditItem()">{{ taskItem().name }}</p>
+          <span *ngIf="taskItem().isCompleted">{{ completedDate() }}</span>
         </div>
       </span>
     </label>
     <input
       type="text"
       formControlName="taskItem"
-      *ngIf="hasEditItem"
+      *ngIf="hasEditItem()"
       class="taskItem__form--edit"
-      [id]="taskItem.id"
-      (keyup.enter)="confirmEditItem(taskItem)"
+      [id]="taskItem().id"
+      (keyup.enter)="confirmEditItem(taskItem())"
     />
   </form>
 
@@ -40,14 +40,14 @@
     <p
       class="taskItem__edit"
       (click)="handleEditItem()"
-      *ngIf="!hasEditItem && showActionsItem"
+      *ngIf="!hasEditItem() && showActionsItem"
     >
       <i class="fa-solid fa-pencil"></i>
     </p>
     <p
       class="taskItem__delete"
       (click)="handleDeleteModal()"
-      *ngIf="!hasEditItem"
+      *ngIf="!hasEditItem()"
     >
       <i class="fa-solid fa-trash"></i>
     </p>
@@ -55,16 +55,16 @@
     <p>
       <i
         class="fa-solid fa-check"
-        *ngIf="hasEditItem && showActionsItem"
-        (click)="confirmEditItem(taskItem)"
+        *ngIf="hasEditItem() && showActionsItem"
+        (click)="confirmEditItem(taskItem())"
       ></i>
     </p>
   </div>
 </div>
 
 <app-task-modal
-  [openModal]="showModal"
-  [title]="titleModal"
-  [subtitle]="subtitleModal"
-  [actions]="actionsModal"
+  [openModal]="showModal()"
+  [title]="titleModal()"
+  [subtitle]="subtitleModal()"
+  [actions]="actionsModal()"
 ></app-task-modal>

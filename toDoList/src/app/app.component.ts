@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { CommonModule } from '@angular/common';
@@ -27,11 +27,10 @@ import { CompletedTasksComponent } from './components/completed-tasks/completed-
 })
 export class AppComponent {
   title = 'toDoList';
-  protected tasksList: ITask[] = [];
-  protected tasksListCompleted: ITask[] = [];
-
-  protected loading = false;
-  protected error = false;
+  protected tasksList: WritableSignal<ITask[]> = signal([]);
+  protected tasksListCompleted: WritableSignal<ITask[]> = signal([]);
+  protected loading: WritableSignal<boolean> = signal(false);
+  protected error: WritableSignal<boolean> = signal(false);
 
   constructor(private readonly taskService: TaskService) {}
 
@@ -41,8 +40,8 @@ export class AppComponent {
 
   public getItemsList(): void {
     this.handleRequest(this.taskService.getTasks(), (response) => {
-      this.tasksList = response.filter((item) => !item.isCompleted);
-      this.tasksListCompleted = response.filter((item) => item.isCompleted);
+      this.tasksList.set(response.filter((item) => !item.isCompleted));
+      this.tasksListCompleted.set(response.filter((item) => item.isCompleted));
     });
   }
 
@@ -74,19 +73,19 @@ export class AppComponent {
     request: Observable<T>,
     onSuccess: (response: T) => void
   ): void {
-    this.loading = true;
-    this.error = false;
+    this.loading.set(true);
+    this.error.set(false);
 
     request.subscribe({
       next: (response) => {
         onSuccess(response);
       },
       error: (error) => {
-        this.error = true;
+        this.error.set(true);
         throwError(() => error);
       },
       complete: () => {
-        this.loading = false;
+        this.loading.set(false);
       },
     });
   }

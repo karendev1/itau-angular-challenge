@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm" (ngSubmit)="addTask()">
+<form [formGroup]="taskForm()" (ngSubmit)="addTask()">
   <div class="task-form__container">
     <input
       type="text"
@@ -7,20 +7,20 @@
       formControlName="task"
       [ngClass]="{
         'task-form__input--error':
-          taskForm.invalid && taskForm.value.task.length > 0
+          taskForm().invalid && taskForm().value.task.length > 0
       }"
     />
     <button
       class="task-form__button"
       type="submit"
-      [disabled]="taskForm.invalid"
+      [disabled]="taskForm().invalid"
     >
       Adicionar
     </button>
   </div>
   <p
     class="task-form__error"
-    *ngIf="taskForm.invalid && taskForm.value.task.length > 0"
+    *ngIf="taskForm().invalid && taskForm().value.task.length > 0"
   >
     Digite no mínimo 3 caracteres para adicionar a tarefa...
   </p>

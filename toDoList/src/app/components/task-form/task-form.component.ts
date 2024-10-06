@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,7 +15,8 @@ import {
   styleUrl: './task-form.component.scss',
 })
 export class TaskFormComponent {
-  protected taskForm!: FormGroup;
+  protected taskForm: WritableSignal<FormGroup> = signal(new FormGroup({}));
+
   @Output() $taskAdded = new EventEmitter<string>();
 
   constructor(private readonly fb: FormBuilder) {
@@ -23,13 +24,13 @@ export class TaskFormComponent {
   }
 
   public createForm(): void {
-    this.taskForm = this.fb.group({
+    this.taskForm.set(this.fb.group({
       task: ['', [Validators.required, Validators.minLength(3)]],
-    });
+    }));
   }
 
   public addTask(): void {
-    this.$taskAdded.emit(this.taskForm.value.task);
-    this.taskForm.reset();
+    this.$taskAdded.emit(this.taskForm().value.task);
+    this.taskForm().reset();
   }
 }
