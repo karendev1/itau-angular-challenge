@@ -9,11 +9,13 @@
         'task-form__input--error':
           taskForm().invalid && taskForm().value.task.length > 0
       }"
+      data-testid="input"
     />
     <button
       class="task-form__button"
       type="submit"
       [disabled]="taskForm().invalid"
+      data-testid="add-button"
     >
       Adicionar
     </button>
@@ -21,6 +23,7 @@
   <p
     class="task-form__error"
     *ngIf="taskForm().invalid && taskForm().value.task.length > 0"
+    data-testid="text-validation"
   >
     Digite no mínimo 3 caracteres para adicionar a tarefa...
   </p>
