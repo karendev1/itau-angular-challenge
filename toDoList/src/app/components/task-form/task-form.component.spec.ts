@@ -4,7 +4,7 @@ import { TaskFormComponent } from './task-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-fdescribe('TaskFormComponent', () => {
+describe('TaskFormComponent', () => {
   let component: TaskFormComponent;
   let fixture: ComponentFixture<TaskFormComponent>;
 

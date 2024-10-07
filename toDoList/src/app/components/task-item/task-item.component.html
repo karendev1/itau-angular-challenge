@@ -12,6 +12,7 @@
         type="checkbox"
         formControlName="selectedTaskItem"
         (change)="setCompletedTask($event)"
+        data-testid="checkbox"
       />
       <span class="taskItem__custom-checkbox--checkmark"></span>
       <span
@@ -19,6 +20,7 @@
         [ngClass]="{
           'taskItem__custom-checkbox--text-completed': taskItem().isCompleted
         }"
+        data-testid="custom-checkbox-text"
       >
         <div class="taskItem__custom-checkbox--information">
           <p *ngIf="!hasEditItem()">{{ taskItem().name }}</p>
@@ -41,6 +43,7 @@
       class="taskItem__edit"
       (click)="handleEditItem()"
       *ngIf="!hasEditItem() && showActionsItem"
+      data-testid="edit-item"
     >
       <i class="fa-solid fa-pencil"></i>
     </p>
@@ -48,6 +51,7 @@
       class="taskItem__delete"
       (click)="handleDeleteModal()"
       *ngIf="!hasEditItem()"
+      data-testid="delete-item"
     >
       <i class="fa-solid fa-trash"></i>
     </p>
@@ -57,6 +61,7 @@
         class="fa-solid fa-check"
         *ngIf="hasEditItem() && showActionsItem"
         (click)="confirmEditItem(taskItem())"
+        data-testid="confirm-edit-item"
       ></i>
     </p>
   </div>
