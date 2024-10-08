@@ -1,91 +1,83 @@
-# Desafio Angular Itau
 
-![Banner](./doc/images/banner.png)
+# Desafio Angular - Itaú
 
-## 💁‍♂️ Sobre o itau 
+Olá, seja bem-vindo ao meu projeto! Este projeto foi um desafio para uma vaga de Angular no banco Itaú.
 
-O Itaú Unibanco é o maior banco privado do Brasil, a maior instituição financeira da América Latina e uma das maiores do mundo.
+## Link para o readme antigo, com os requisitos do projeto:
+[Caminho as especificações](./especificações.md)
 
-Nossa marca é apontada pelo 16º ano consecutivo como a mais valiosa do país, segundo o ranking Interbrand, entre outros importantes reconhecimentos.
+## Como rodar o projeto:
 
-## 📋 O que avaliaremos
+1. Clone o projeto:
+   ```bash
+   git clone https://github.com/karendev1/itau-angular-challenge.git
+   ```
+   
+2. Acesse a branch:
+   ```bash
+   git checkout interview/karen-santana
+   ```
+   
+3. Entre na pasta do projeto:
+   ```bash
+   cd toDoList
+   ```
+   
+4. Instale as dependências:
+   ```bash
+   npm install
+   ```
+   
+5. Rode o projeto:
+   ```bash
+   npm start
+   ```
+   > **Atenção**: Configurei para que, ao rodar `npm start`, o JSON Server também seja iniciado automaticamente.
 
-Iremos avaliar o seu conhecimento com angular e typescript.
+6. Acesse o projeto em `localhost:4200` para utilizá-lo.
 
-## 🔧 Configurando o ambiente
+## Especificações
 
-Siga esse passo a passo para iniciar seu projeto:
+- **Banco de dados**: Utilizei o JSON Server para simular o banco de dados e as requisições HTTP.
+- **Serviços**: Criei o service `TaskService` para realizar as requisições HTTP.
+- **Componentes**: 
+  - `TaskForm`
+  - `TaskList`
+  - `TaskItem`
+  - `CompletedTasks`
+  - `TaskModal`
+  
+- **Arquitetura**: A pasta `shared` contém os *enums*, interfaces, mocks e helpers utilizados no projeto. A pasta `core` contém o service e a pasta `components` contém os componentes utilizados no projeto.
+- **Testes**: Todos os testes unitários foram feitos. Para rodar, execute:
+  ```bash
+  npm run test
+  ```
+- **Estilos**: As variáveis de cor estão definidas no arquivo `_variables.scss`, seguindo as boas práticas.
+- **Metodologia BEM**: Para definição das classes, utilizei a metodologia BEM. Saiba mais em: [BEM Introduction](https://getbem.com/introduction/)
+- **Commits**: Usei a padronização do [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) para organização dos commits.
+- **Responsividade**: O projeto é totalmente responsivo, adequado tanto para web quanto para dispositivos móveis. Utilizei FlexBox, Grid e media queries.
+- **Angular Signals**: Implementado no projeto.
+- **Standalone Components**: Utilizado para otimização e organização dos componentes.
 
-**1. Dê um like e faça um fork do projeto**
+## Utilização
 
-**2. Faça o clone do projeto no seu computador**
+1. **Criar tarefa**:
+   - Digite a tarefa no input e pressione "Enter" ou clique no botão "Adicionar".
+   - A tarefa deve ter no mínimo 3 caracteres.
 
-```sh
-git clone "https://github.com/**seu-usuario**/itau-angular-challenge.git"
-```
-*no lugar do seu ˜\*\*seu-usuario\*\*˜ coloque o seu usario do github.
+2. **Editar tarefa**:
+   - Clique no ícone de lápis. Um input será habilitado para edição substituindo a label da tarefa.
+   - Após editar, pressione "Enter" ou clique no ícone de confirmação para salvar.
 
-**3. Criando uma nova branch.**
+3. **Excluir tarefa**:
+   - Clique no ícone de lixeira para abrir um modal de confirmação.
+   - Confirme para excluir a tarefa, ou cancele para mantê-la.
 
-```sh
-git checkout -b "interview/nome-sobrenome"
-```
+4. **Marcar como concluída**:
+   - Marque a tarefa no checkbox para movê-la para a lista de "Tarefas concluídas".
+   - A tarefa riscada será exibida com data e hora de conclusão.
+   - Você pode removê-la da lista de concluídas, se desejar.
 
-**4. Instalando o angular**
+---
 
-```sh
-npm install -g @angular/cli
-```
-
-**5. Iniciando o projeto**
-
-```sh
-ng new .
-```
-
-**6. Agora é rodar o projeto**
-
-```sh
-npm start
-```
-
-## 🚀 Desafio frontend
-
-O objetivo do desafio é desenvolver um to do list. 
-
-Os possiveis valores para a vaga são:
-
-- Backend
-- Frontend
-- QA
-
-e para o Nivel deverão ser:
-
-- Jr.
-- Pl.
-- Sn.
-
-## 📋 Requisitos
-
-### Regras de Negocios
-🔨 [Requisitos funcionais](./doc/features/REQUIREMENTS.md)
-
-### Obrigatório
-
-1. Escrever o código com [Angular 18](https://blog.angular.dev/angular-v18-is-now-available-e79d5ac0affe)  ;)
-2. Validar campos obrigatórios!
-3. Defina uma estrutura do projeto.
-4. Gerenciamento de estado
-5. Fazer testes unitários.
-
-
-### Extras (Opcionais)
-1. Utilizar standalone components
-2. Utilizar signals.
-4. [Json Server](https://www.npmjs.com/package/json-server) para guardar valores
-
-
-## 🔨 Ferramento de desenvolvimento
-
-Fique a vontade para usar a ferramenta mais confortável para você ;)
-Aqui usamos muito o [VS code](https://code.visualstudio.com/)
+Obrigada pela oportunidade! Qualquer dúvida, estou à disposição. 😊
