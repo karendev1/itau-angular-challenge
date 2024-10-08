@@ -4,12 +4,13 @@
 
 <div *ngIf="!loading() && !error()" class="app__container">
   <div class="app__container--action-tasks">
-    <app-task-form ($taskAdded)="addTask($event)"></app-task-form>
+    <app-task-form ($taskAdded)="addTask($event)" data-testid="task-form"></app-task-form>
 
     <app-task-list
       [tasksList]="tasksList()"
       ($deleteTask)="deleteTask($event)"
       ($editTask)="editTask($event)"
+      data-testid="task-list"
     ></app-task-list>
   </div>
 

@@ -80,9 +80,8 @@ export class AppComponent {
       next: (response) => {
         onSuccess(response);
       },
-      error: (error) => {
+      error: () => {
         this.error.set(true);
-        throwError(() => error);
       },
       complete: () => {
         this.loading.set(false);

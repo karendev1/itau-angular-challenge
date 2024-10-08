@@ -43,7 +43,6 @@ export class TaskService {
   }
 
   private handleError(error: any): Observable<never> {
-    console.error('Ocorreu um erro', error);
     return throwError(
       () => new Error('Erro na operação. Por favor, tente novamente.')
     );
