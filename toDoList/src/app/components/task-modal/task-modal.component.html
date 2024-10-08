@@ -1,22 +1,24 @@
-<div class="task-modal__container" *ngIf="openModal">
+<div class="task-modal__container" *ngIf="openModal" data-testid="modal">
   <h3 class="task-modal__title" *ngIf="title">
     {{ title }}
   </h3>
-  <p class="task-modal__subtitle" *ngIf="subtitle">{{ subtitle }}</p>
-  <div class="task-modal__actions" *ngIf="actions">
+  <p class="task-modal__subtitle" *ngIf="subtitle" data-testid="subtitle">{{ subtitle }}</p>
+  <div class="task-modal__actions" *ngIf="actions" data-testid="actions">
     <button
       (click)="actions.primary.callback()"
       class="task-modal__button task-modal__button--primary"
+      data-testid="primary-button"
     >
       {{ actions.primary.label }}
     </button>
     <button
       (click)="actions.secondary.callback()"
       class="task-modal__button task-modal__button--secondary"
+      data-testid="secondary-button"
     >
       {{ actions.secondary.label }}
     </button>
   </div>
 </div>
 
-<div class="task-modal__overlay" *ngIf="openModal"></div>
+<div class="task-modal__overlay" *ngIf="openModal"  data-testid="overlay"></div>

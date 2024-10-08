@@ -4,11 +4,12 @@
       [setTaskItem]="item"
       ($deleteTask)="$deleteTask.emit(item.id)"
       ($editTask)="$editTask.emit($event)"
+      data-testid="item"
     ></app-task-item>
   </div>
 </div>
 
-<div class="task-list__empty" *ngIf="tasksList.length < 1">
+<div class="task-list__empty" *ngIf="tasksList.length < 1" data-testid="empty-warning">
   <p class="task-list__empty--text">Nenhuma tarefa adicionada.</p>
 
   <p class="task-list__empty--text">
