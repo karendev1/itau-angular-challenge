@@ -4,7 +4,7 @@
 Olá, seja bem-vindo ao meu projeto! Este projeto foi um desafio para uma vaga de Angular no banco Itaú.
 
 ## Link para o readme antigo, com os requisitos do projeto:
-[Caminho as especificações](./especificações.md)
+[Caminho as requisitos](./especificações.md)
 
 ## Como rodar o projeto:
 
