@@ -44,7 +44,7 @@ describe('TaskItemComponent', () => {
   it('should call handleDeleteModal when trash icon to be clicked', () => {
     component['hasEditItem'].set(false);
     const spyDeleteTask = spyOn(component.$deleteTask, 'emit');
-    const spyShowModal = spyOn(component, 'handleShowModal');
+    const spyShowModal = spyOn(component, 'handleShowModal').and.callThrough();
     fixture.detectChanges();
     const buttonDelete = fixture.debugElement.query(
       By.css('[data-testid="delete-item"]')
@@ -100,4 +100,17 @@ describe('TaskItemComponent', () => {
     fixture.detectChanges();
     expect(spyEdit).not.toHaveBeenCalled();
   });
-});
+
+  it("should call setCompletedTask when checkbox change", () => {
+    const spy = spyOn(component, 'setCompletedTask').and.callThrough();
+    const spyConfirm = spyOn(component, 'confirmEditItem').and.callThrough()
+    fixture.detectChanges();
+    const checkbox =  fixture.debugElement.query(
+      By.css('[data-testid="checkbox"]')
+    )
+    checkbox.triggerEventHandler('change', {target: { checked: true}});
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalled();
+    expect(spyConfirm).toHaveBeenCalledWith(component['taskItem'](), true);
+  })
+})
